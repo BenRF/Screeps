@@ -32,16 +32,21 @@ module.exports = {
             buildUnit.run(['harvester',1,2,2,0,0,0,0,0],spawner);
         }
         for (var i=0; i < num; i++) {
-            if (harvesters.length - i <= 0) {
+            if (harvesters.length - i < 0) {
                 suggested = harvester;
-            } else if(builders.length - i <= 0) {
+                break;
+            } else if(builders.length - i < 0) {
                 suggested = builder;
-            } else if(upgraders.length - i <= 0) {
+                break;
+            } else if(upgraders.length - i < 0) {
                 suggested = upgrader;
+                break;
             } else if(transporters.length < 1 && containers.length >= 1 && extensions.length >= 1) {
                 suggested = transporter;
-            } else if(fixers.length - i <= -2) {
+                break;
+            } else if(fixers.length - i < -2) {
                 suggested = fixer;
+                break;
             }
         }
         if (suggested != null) {
