@@ -32,14 +32,14 @@ module.exports = {
             buildUnit.run(['harvester',1,2,2,0,0,0,0,0],spawner);
         }
         for (var i=0; i < num; i++) {
-            if (harvesters.length - i < 0) {
+            if (harvesters.length - i < 1) {
                 suggested = harvester;
-                break;
-            } else if(builders.length - i < 0) {
-                suggested = builder;
                 break;
             } else if(upgraders.length - i < 0) {
                 suggested = upgrader;
+                break;
+            } else if(builders.length - i < 0) {
+                suggested = builder;
                 break;
             } else if(transporters.length < 1 && containers.length >= 1 && extensions.length >= 1) {
                 suggested = transporter;
@@ -50,6 +50,9 @@ module.exports = {
             }
         }
         if (suggested != null) {
+            if (cap >= 800) {
+                cap = 800;
+            }
             ///workNum,carryNum,moveNum,attackNum,rangeNum,healNum,claimNum,toughNum
             var left = cap % 200;
             var mod = (cap-left)/200
