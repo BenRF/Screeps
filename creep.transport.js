@@ -1,9 +1,14 @@
-var mine = require('creep.mine');
 var make = require('creep.make');
 
 module.exports = {
     run: function(creep) {
-        var targets = creep.pos.findClosestByPath(FIND_STRUCTURES, {filter: (structure) => {return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) && structure.energy < structure.energyCapacity;}});
+        const target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
+        if(target && creep.room.find(FIND_HOSTILE_CREEPS).length == 0) {
+            if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(target,{visualizePathStyle: {stroke: '#848484'}});
+            }
+        }
+        var targets = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (structure) => {return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) && structure.energy < structure.energyCapacity;}});
         if (targets != null) {
             if (creep.transfer(targets, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(targets, {visualizePathStyle: {stroke: '#00F3FF'}});

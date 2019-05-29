@@ -1,15 +1,8 @@
 module.exports = {
     run: function(creep) {
-        var sites = creep.room.find(FIND_CONSTRUCTION_SITES);
-        var site = sites[0];
-        for (var s of sites) {
-            if (s.structureType != "road") {
-                site = s;
-                break;
-            }
-        }
-        if(creep.build(site) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(site, {visualizePathStyle: {stroke: '#F8FF00'}});
+        var sites = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+        if(creep.build(sites) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(sites, {visualizePathStyle: {stroke: '#F8FF00'}});
         }
     }
 };

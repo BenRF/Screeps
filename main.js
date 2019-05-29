@@ -19,7 +19,7 @@ module.exports.loop = function () {
     for (var s in Game.spawns) {
         if(s.spawning) {
             var spawningCreep = Game.creeps[s.spawning.name];
-            s.room.visual.text('🛠️' + spawningCreep.memory.role,s.pos.x-2.5,s.pos.y+2, {align: 'left', opacity:1});
+            s.room.visual.text('SPAWNING ' + spawningCreep.memory.role,s.pos.x-2.5,s.pos.y+2, {align: 'left', opacity:1});
         } else {
             buildUnitCheck.run(s);
         }
@@ -32,10 +32,12 @@ module.exports.loop = function () {
     
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
-        if (creep.ticksToLive <= 25) {
+        if (creep.ticksToLive <= 30) {
             if (creep.ticksToLive % 5 == 0) {
                 var speech = ["Time to go","Goodbye","I tried","Cya round","Adios"];
                 creep.say(speech[Math.floor(Math.random()*speech.length)],true);
+            } else if (creep.ticksToLive == 2) {
+                console.log(name + " has perished")
             }
             c.deposit(creep);
             continue;

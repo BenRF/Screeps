@@ -44,7 +44,7 @@ module.exports = {
             } else if(transporters.length < 1 && containers.length >= 1 && extensions.length >= 1) {
                 suggested = transporter;
                 break;
-            } else if(fixers.length - i < -2) {
+            } else if(fixers.length - i < -1) {
                 suggested = fixer;
                 break;
             }

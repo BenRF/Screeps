@@ -11,7 +11,7 @@ module.exports = {
                 creep.memory.building = false;
                 c.refill(creep);
     	    }
-    	    if(!creep.memory.building && creep.carry.energy == creep.carryCapacity && sites.length > 0) {
+    	    if(!creep.memory.building &&  _.sum(creep.carry) == creep.carryCapacity && sites.length > 0) {
     	        creep.memory.building = true;
     	        creep.say("Build time");
     	    }

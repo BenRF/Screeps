@@ -10,9 +10,9 @@ module.exports = {
                     creep.moveTo(target,{visualizePathStyle: {stroke: '#848484'}});
                 }
             } else {
-                var sources = creep.room.find(FIND_STRUCTURES, { filter: (i) => i.structureType == STRUCTURE_CONTAINER && i.store[RESOURCE_ENERGY] > 0});
-                if(creep.withdraw(sources[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#848484'}});
+                var sources = creep.pos.findClosestByPath(FIND_STRUCTURES, { filter: (i) => i.structureType == STRUCTURE_CONTAINER && i.store[RESOURCE_ENERGY] > 0});
+                if(creep.withdraw(sources, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(sources, {visualizePathStyle: {stroke: '#848484'}});
                 } else {
                     require('creep.mine').run(creep);
                 }
